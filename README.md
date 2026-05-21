@@ -53,6 +53,7 @@ All prices are list prices in USD as of Q1 2026. Storage is per GB/month (standa
 | [IBM Cloud Object Storage](https://www.ibm.com/cloud/object-storage/pricing)        | $0.022          | $0.09       | One-Rate plan   | 5     | 10 TB      | [Full](https://cloud.ibm.com/docs/cloud-object-storage?topic=cloud-object-storage-compatibility-api) | Yes         | Yes        | Complex pricing with Smart Tier, One-Rate, and Standard     |
 | [Nebius Object Storage](https://nebius.com/services/storage)                        | $0.0164         | $0.01       | Free internal   | 4     | 5 TB       | [Full](https://docs.nebius.com/storage/s3/)                                                          | Yes         | Yes        | EU-only; newer brand (Yandex Cloud spinoff)                 |
 | [Impossible Cloud](https://impossiblecloud.com/pricing)                             | $0.006          | $0          | Free            | 1     | 5 TB       | [Full](https://docs.impossiblecloud.com/)                                                            | Yes         | Yes        | Newer, EU-focused, limited track record                     |
+| [Rabata](https://rabata.io)                                                         | $0.010          | $0.01       | None            | 2     | 5 TB       | [Full](https://rabata.io/docs/s3-api)                                                                | —           | —          | No free egress; Backup plan billed in 10 TB increments      |
 | [Fastly Object Storage](https://www.fastly.com/products/storage)                    | $0.012          | $0          | Included w/ CDN | 1     | 5 TB       | [Full](https://docs.fastly.com/en/storage/)                                                          | No          | No         | Newer product, fewer features than mature providers         |
 
 `$0*` = Free egress with "reasonable use" policy — typically means egress cannot exceed storage volume. Check the provider's terms.
@@ -129,6 +130,7 @@ Real-world monthly cost for a common workload: **10 TB stored, 5 TB egress/month
 | Backblaze B2  | $60     | $20    | $4    | $5    | **~$89**     |
 | Cloudflare R2 | $150    | $0     | $3.60 | $4.50 | **~$158**    |
 | OVHcloud      | $70     | $0     | $1    | $5    | **~$76**     |
+| Rabata        | $100    | $50    | $0    | $0    | **~$150**    |
 | Hetzner       | $52     | $40    | $1    | $5    | **~$98**     |
 | AWS S3        | $230    | $450   | $4    | $5    | **~$689**    |
 | GCS           | $200    | $600   | $4    | $5    | **~$809**    |
@@ -259,6 +261,7 @@ The most important number nobody compares: **what does it cost to leave?**
 | Wasabi           | $0*         | **$0***             | ~9 days       | Easy* (reasonable use)   |
 | IDrive e2        | $0*         | **$0***             | ~9 days       | Easy* (reasonable use)   |
 | Impossible Cloud | $0          | **$0**              | ~9 days       | **Trivial**              |
+| Rabata           | $0.01/GB    | **$1,000**          | ~9 days       | Easy                     |
 | Storj            | $0.007/GB   | **$700**            | ~9 days       | Easy                     |
 | MinIO            | $0          | **$0**              | Your infra    | **Trivial** (you own it) |
 
