@@ -7,7 +7,7 @@
   "verified": "Jul 2026",
   "bestFor": ["aiml", "backup", "datalake"],
   "migrationEase": "High (S3-compatible gateway at s3.hf.co works with AWS CLI, boto3, s5cmd; also hf CLI sync/cp and HfFileSystem/fsspec)",
-  "gotchas": "Headline $/TB is the entry tier; price only drops at 50TB+/200TB+/500TB+ volume thresholds (see billing), so small workloads pay the top rate. Non-versioned and mutable by design — no object versioning, no object lock, no lifecycle rules, no PRs/discussions (that is the point: working storage, not publishing). Egress is bundled rather than strictly free: included up to 8x your storage volume/month, overage terms not public. Advertised durability is not published for buckets specifically (Xet backend stores chunks in S3). S3 gateway is single-region (us-east-1) and ListObjectsV2 is unsupported; some SDKs that don't follow S3 302 redirects get proxied through the gateway (slower). Bucket-to-repo server-side copy not yet supported; server-side copies are same-region only. Max single file is 500 GB (200 GB recommended).",
+  "gotchas": "Headline $/TB is the entry tier; price only drops at 50TB+/200TB+/500TB+ volume thresholds (see billing). Non-versioned and mutable by design — no object versioning, no object lock, no lifecycle rules. Egress is bundled rather than strictly free: included up to 8x your storage volume/month, overage terms not public. Advertised durability is not published for buckets specifically (Xet backend stores chunks in S3). S3 gateway is single-region (us-east-1) and ListObjectsV2 is unsupported; some SDKs that don't follow S3 302 redirects get proxied through the gateway (slower). Max single file is 500 GB (200 GB recommended).",
   "pricing": {
     "storageStd": 0.012,
     "storageIA": null,
