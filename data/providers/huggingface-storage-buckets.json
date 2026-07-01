@@ -1,0 +1,95 @@
+{
+  "$schema": "../schema.json",
+  "id": "huggingface-storage-buckets",
+  "name": "Hugging Face Storage Buckets",
+  "type": "alternative",
+  "url": "https://huggingface.co/storage",
+  "verified": "Jul 2026",
+  "bestFor": ["aiml", "backup", "datalake"],
+  "migrationEase": "High (S3-compatible gateway at s3.hf.co works with AWS CLI, boto3, s5cmd; also hf CLI sync/cp and HfFileSystem/fsspec)",
+  "gotchas": "Headline $/TB is the entry tier; price only drops at 50TB+/200TB+/500TB+ volume thresholds (see billing), so small workloads pay the top rate. Non-versioned and mutable by design — no object versioning, no object lock, no lifecycle rules, no PRs/discussions (that is the point: working storage, not publishing). Egress is bundled rather than strictly free: included up to 8x your storage volume/month, overage terms not public. Advertised durability is not published for buckets specifically (Xet backend stores chunks in S3). S3 gateway is single-region (us-east-1) and ListObjectsV2 is unsupported; some SDKs that don't follow S3 302 redirects get proxied through the gateway (slower). Bucket-to-repo server-side copy not yet supported; server-side copies are same-region only. Max single file is 500 GB (200 GB recommended).",
+  "pricing": {
+    "storageStd": 0.012,
+    "storageIA": null,
+    "storageArchive": null,
+    "storageDeep": null,
+    "egressPerGB": null,
+    "egressFree": "Included up to 8x stored volume/month; CDN egress bundled at no extra cost",
+    "putPer1k": 0,
+    "getPer1k": 0,
+    "retrievalFee": "None — single always-hot tier",
+    "minRetention": "None",
+    "billing": "Per-TB monthly, pay-as-you-go above plan allowance. Volume tiers (public): $0.012/GB base -> $0.010 at 50TB -> $0.009 at 200TB -> $0.008 at 500TB. Private: $0.018 -> $0.016 -> $0.014 -> $0.012 at the same thresholds. Enterprise billed on deduplicated footprint. Listed storageStd is the entry tier.",
+    "freeTier": "Free storage allowance on all accounts (100 GB private for free users); included storage scales with PRO/Team/Enterprise plans"
+  },
+  "features": {
+    "tiers": 1,
+    "tierNames": "Standard (always hot, mutable)",
+    "autoTier": false,
+    "versioning": false,
+    "lifecycle": false,
+    "objectLock": false,
+    "eventNotify": false,
+    "notifyFormat": null,
+    "s3Compat": "Full",
+    "apiDepth": "Core S3 via s3.hf.co gateway (AWS CLI, boto3, s5cmd); no ListObjectsV2, no lifecycle, no bucket notifications. Native hf CLI + Python (huggingface_hub) + JS (@huggingface/hub) + HfFileSystem/fsspec"
+  },
+  "infrastructure": {
+    "durability": null,
+    "availSLA": null,
+    "regions": 2,
+    "geoNA": true,
+    "geoEU": true,
+    "geoAPAC": false,
+    "multiRegion": false,
+    "edgePops": null,
+    "consistency": "Strong read-after-write"
+  },
+  "performance": {
+    "ttfbP50": null,
+    "ttfbP99": null,
+    "throughput": "CDN-backed; pre-warm cache into AWS/GCP regions near compute. No published throughput benchmark",
+    "reqLimitGET": null,
+    "reqLimitPUT": null,
+    "throttle": "Hub API rate limits apply (per plan); not published as S3-style req/s"
+  },
+  "limits": {
+    "maxBuckets": "Not published (per namespace, standard Hub quota)",
+    "maxObjSize": "500 GB hard limit (200 GB recommended)",
+    "maxMetaKB": null
+  },
+  "dataProtection": {
+    "replication": false,
+    "replRPO": "N/A (single home region; CDN pre-warm is a cache, not replication)",
+    "softDelete": false,
+    "legalHold": false,
+    "mfaDelete": false,
+    "pitRestore": false
+  },
+  "advancedS3": {
+    "selectQuery": false,
+    "batchOps": true,
+    "inventory": false,
+    "accessLog": true,
+    "deltaIceberg": "Via HfFileSystem + Spark/PySpark; no native S3 Tables"
+  },
+  "security": {
+    "sseS3": true,
+    "sseKMS": false,
+    "sseC": false,
+    "encryptDefault": true
+  },
+  "compliance": {
+    "soc2": true,
+    "hipaa": false,
+    "iso27001": false,
+    "gdpr": true
+  },
+  "ecosystem": {
+    "cdn": "Built-in HF CDN (AWS + GCP pre-warm at launch)",
+    "staticHost": false,
+    "transferAccel": true,
+    "nativeCompute": "HF Spaces, HF Jobs (volume-mount buckets read-write)",
+    "nativeAnalytics": "HfFileSystem (pandas, DuckDB, Polars, Dask, Spark, 🤗 Datasets via fsspec)"
+  }
+}

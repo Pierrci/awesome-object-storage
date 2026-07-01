@@ -6,6 +6,13 @@ For per-provider last-verified dates, see the `verified` field in each provider'
 
 ---
 
+## July 2026
+
+### Initial data collection
+- **Hugging Face Storage Buckets** — Initial entry. S3-compatible (gateway at s3.hf.co) + native hf CLI/Python/JS/fsspec. ML-native, Xet chunk-level dedup, built-in CDN with AWS/GCP pre-warm. Non-versioned/mutable by design (no versioning, object lock, or lifecycle). $0.012/GB/mo public ($0.018 private), egress bundled up to 8x storage, no per-request PUT/GET fees. Max object 500 GB. Durability not published. (Jul 1)
+
+---
+
 ## April 2026
 
 ### Verified (no changes)
