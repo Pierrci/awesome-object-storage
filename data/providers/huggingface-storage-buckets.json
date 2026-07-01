@@ -7,7 +7,7 @@
   "verified": "Jul 2026",
   "bestFor": ["aiml", "backup", "datalake"],
   "migrationEase": "High (S3-compatible gateway at s3.hf.co works with AWS CLI, boto3, s5cmd; also hf CLI sync/cp and HfFileSystem/fsspec)",
-  "gotchas": "Headline $/TB is the entry tier; price only drops at 50TB+/200TB+/500TB+ volume thresholds (see billing). Non-versioned and mutable by design — no object versioning, no object lock, no lifecycle rules. Egress is bundled rather than strictly free: included up to 8x your storage volume/month, overage terms not public. Advertised durability is not published for buckets specifically (Xet backend stores chunks in S3). S3 gateway is single-region (us-east-1) and ListObjectsV2 is unsupported; some SDKs that don't follow S3 302 redirects get proxied through the gateway (slower). Max single file is 500 GB (200 GB recommended).",
+  "gotchas": "New product - egress pricing above the included ratio not published yet.",
   "pricing": {
     "storageStd": 0.012,
     "storageIA": null,
@@ -17,10 +17,10 @@
     "egressFree": "Included up to 8x stored volume/month; CDN egress bundled at no extra cost",
     "putPer1k": 0,
     "getPer1k": 0,
-    "retrievalFee": "None — single always-hot tier",
+    "retrievalFee": "None",
     "minRetention": "None",
-    "billing": "Per-TB monthly, pay-as-you-go above plan allowance. Volume tiers (public): $0.012/GB base -> $0.010 at 50TB -> $0.009 at 200TB -> $0.008 at 500TB. Private: $0.018 -> $0.016 -> $0.014 -> $0.012 at the same thresholds. Enterprise billed on deduplicated footprint. Listed storageStd is the entry tier.",
-    "freeTier": "Free storage allowance on all accounts (100 GB private for free users); included storage scales with PRO/Team/Enterprise plans"
+    "billing": "Monthly",
+    "freeTier": "100 GB private storage"
   },
   "features": {
     "tiers": 1,
@@ -32,7 +32,7 @@
     "eventNotify": false,
     "notifyFormat": null,
     "s3Compat": "Full",
-    "apiDepth": "Core S3 via s3.hf.co gateway (AWS CLI, boto3, s5cmd); no ListObjectsV2, no lifecycle, no bucket notifications. Native hf CLI + Python (huggingface_hub) + JS (@huggingface/hub) + HfFileSystem/fsspec"
+    "apiDepth": "High (core S3) - no ListObjectsV1"
   },
   "infrastructure": {
     "durability": null,
@@ -48,14 +48,14 @@
   "performance": {
     "ttfbP50": null,
     "ttfbP99": null,
-    "throughput": "CDN-backed; pre-warm cache into AWS/GCP regions near compute. No published throughput benchmark",
+    "throughput": null,
     "reqLimitGET": null,
     "reqLimitPUT": null,
     "throttle": "Hub API rate limits apply (per plan); not published as S3-style req/s"
   },
   "limits": {
-    "maxBuckets": "Not published (per namespace, standard Hub quota)",
-    "maxObjSize": "500 GB hard limit (200 GB recommended)",
+    "maxBuckets": null,
+    "maxObjSize": "500 GB",
     "maxMetaKB": null
   },
   "dataProtection": {
